@@ -1,0 +1,36 @@
+# DT for MAL — current-state/PAD-clean shuffled-RTG control.
+# Same corrected next-action protocol as dt_mal_current_state, but train-time
+# RTG values are permuted within each trajectory. Tests whether the MAL RTG/
+# no-RTG accuracy gap survives breaking positional alignment between state,
+# action, and RTG.
+protocol: "corrected_v3"
+dataset: "mal"
+anime_path:   "data/mal/anime.csv"
+ratings_path: "data/mal/animelist.csv"
+min_interactions: 15
+rtg_window: 20
+rtg_scale:  20.0
+drop_incomplete_rtg: true
+user_split: "random"
+split_seed: 42
+val_fraction: 0.1
+test_fraction: 0.1
+rating_scale: 10.0
+rtg_shuffle: within_traj
+alignment: "current_state"
+
+model: "dt"
+use_rtg: true
+use_pad_token: true
+hidden_size: 128
+n_layer: 3
+n_head: 4
+dropout: 0.1
+context_len: 20
+
+batch_size: 512
+max_steps: 20000
+lr: 1.0e-4
+weight_decay: 1.0e-4
+warmup_steps: 500
+num_workers: 4

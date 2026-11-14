@@ -1,0 +1,31 @@
+# DT for MovieLens 25M — current-state/PAD-clean shuffled-RTG control.
+# Same corrected next-action protocol as dt_movielens_current_state, but
+# train-time RTG values are permuted within each trajectory.
+protocol: "corrected_v3"
+ratings_path: "data/movielens/ml-25m/ratings.csv"
+movies_path:  "data/movielens/ml-25m/movies.csv"
+rtg_window: 20
+rtg_scale:  20.0
+drop_incomplete_rtg: true
+user_split: "random"
+split_seed: 42
+val_fraction: 0.1
+test_fraction: 0.1
+rtg_shuffle: within_traj
+alignment: "current_state"
+
+model: "dt"
+use_rtg: true
+use_pad_token: true
+hidden_size: 128
+n_layer: 3
+n_head: 4
+dropout: 0.1
+context_len: 20
+
+batch_size: 512
+max_steps: 50000
+lr: 1.0e-4
+weight_decay: 1.0e-4
+warmup_steps: 1000
+num_workers: 4

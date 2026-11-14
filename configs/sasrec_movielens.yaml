@@ -1,0 +1,26 @@
+# SASRec baseline for MovieLens 25M
+protocol: "corrected_v3"
+ratings_path: "data/movielens/ml-25m/ratings.csv"
+movies_path:  "data/movielens/ml-25m/movies.csv"
+rtg_window: 20
+rtg_scale:  20.0
+drop_incomplete_rtg: true
+user_split: "random"
+split_seed: 42
+val_fraction: 0.1
+test_fraction: 0.1
+
+model: "sasrec"
+use_pad_token: true     # dedicated PAD row in item_embed
+hidden_size: 128
+n_layer: 2
+n_head: 4
+dropout: 0.2
+context_len: 20
+
+batch_size: 512
+max_steps: 50000
+lr: 1.0e-4
+weight_decay: 1.0e-4
+warmup_steps: 1000
+num_workers: 4
